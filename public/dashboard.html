@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garuda Cloud|Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/main.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+</head>  
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span><span class="icon-bar"></span>
+    <span class="icon-bar"></span></button><a class="navbar-brand" href="#"><span class="navbar-brand-text">Skynet</span></a></div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html"><span class="nav-icon icon-dashboard"></span>Dashboard</a>
+        </li>
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>My Fleet</a>
+        </li>
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>Settings</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<div id="dash">
+    <div class="dash_container container">
+      <div class="tile col-md-2" id="hello">
+        <div id="profile_img"></div>
+        <h2 class="greeting"><span>Hi,</span> Pulkit</h2>
+        <!--<p>Your recently used apps are:</p>
+        <ul class="nav app_nav">
+          <li>
+            <a ><img src="images/apps_thumb/1.png"></a>
+          </li>
+          <li>
+            <a ><img src="images/apps_thumb/2.png"></a>
+          </li>
+          <li>
+            <a ><img src="images/apps_thumb/3.png"></a>
+          </li>
+          <li>
+            <a><img src="images/apps_thumb/4.png"></a>
+          </li>
+        </ul>-->
+      </div>
+
+      <a onclick="launchmissionModal();" class="tile col-md-2" id="article">
+        <span class="dash_icon fa fa-flag"><br/>
+        <span class="count">132</span>
+        <span class="title"><strong>MISSIONS</strong> FLOWN</span>  
+        <span class="desc">Since <strong>March 1984</strong></span>
+      </a>
+      <a onclick="launchairtimeModal();" class="tile col-md-2" id="elements" data-href="#ui">
+        <span class="dash_icon fa-clock-o fa"><br/>
+        <span class="count">21h</span>
+        <span class="title"><strong>AIRTIME</strong></span> 
+        <span class="desc">Since <strong>March 1984</strong></span>
+      </a>
+      <a href="#appslineup" class="tile col-md-2" id="comment">
+        <span class="dash_icon fa fa-code"><br/>
+        <span class="count">5</span>
+        <span class="title"><strong>APPS</strong> CREATED</span> 
+        <span class="desc">Since <strong>March 1984</strong></span>
+      </a>
+      <a onclick="launchroutesModal();" class="tile col-md-2" id="mobile" data-href="#iphone">
+        <span class="dash_icon fa fa-map-marker"><br/>
+        <span class="count">12</span>
+        <span class="title"><strong>ROUTES</strong> SAVED</span> 
+        <span class="desc">Since <strong>March 1984</strong></span>
+
+      </a>
+      <a onclick="launchdronesModal();" class="tile col-md-2" id="recent" data-href="#location">
+        <span class="dash_icon fa fa-plane"><br/>
+        <span class="count">12</span>
+        <span class="title"><strong>ACTIVE DRONES</strong></span> 
+      </a>     
+      </ul>
+      
+    </div>
+  </div>
+
+  <div id="dashboard_main" class="container">
+    <!--<div class="dash_headline col-md-12" style="margin-bottom:20px;">Your products:</div>
+    <div id="productline">
+        <div class="product col-md-2">
+          <a onclick="launchfirstsightModal();" href="#"><div class="product_img">
+            <img src="images/products_thumb/firstsight.png">
+          </div>
+          <div class="product_name">
+            FirstSight
+          </div></a>
+        </div>
+        <div class="product col-md-2">
+          <a href="#"><div class="product_img">
+            <img src="images/products_thumb/remoteaid.png">
+          </div>
+          <div class="product_name">
+            RemoteAid
+          </div></a>
+        </div>
+        <div class="product col-md-2">
+          <a href="#"><div class="product_img">
+            <img src="images/products_thumb/matternet.png">
+          </div>
+          <div class="product_name">
+            MatterNet
+          </div></a>
+        </div>
+    </div>-->
+  <div class="dash_headline" style="margin-left:20px;">Your apps:</div>
+    <div id="appslineup">
+        <div class="app col-md-2">
+          <a onclick="launchfirstsightModal();" href="#"><div class="app_img">
+            <img src="images/apps_icons/1.png">
+          </div>
+          <div class="app_name">
+            FirstSight
+          </div></a>
+        </div>
+        <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/2.png">
+          </div>
+          <div class="app_name">
+            FireAlert
+          </div></a>
+        </div>
+        <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/3.png">
+          </div>
+          <div class="app_name">
+            GoAround
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/4.png">
+          </div>
+          <div class="app_name">
+            FollowMe
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/5.png">
+          </div>
+          <div class="app_name">
+            HideNSeek
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/6.png">
+          </div>
+          <div class="app_name">
+            MineSweeper
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/7.png">
+          </div>
+          <div class="app_name">
+            BayWatch
+          </div></a>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal fade dashboardModal" id="missionModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="removeBlur(); 
+">&times;</button>
+        <div class="modal-header">
+          <h3 class="modal-title">Mission Statistics</h3>
+        </div>
+        <div class="modal-body">
+          <div id="missionPlot"></div>
+          <div id="missionStats">
+            <div class="fa fa-flag"></div>
+            <div class="dashPlotCount">132</div>
+            Missions Launched<br/>
+            <div class="icon-caret-up"></div>
+            <div class="dashPlotCount"> 4.3%</div>
+            since last week
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade dashboardModal" id="airtimeModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="removeBlur();">&times;</button>
+        <div class="modal-header">
+          <h3 class="modal-title">Airtime</h3>
+        </div>
+        <div class="modal-body">
+          <div id="airtimePlot"></div>
+          <div id="airtimeStats">
+            <div class="icon-time"></div>
+            <div class="dashPlotCount">21</div>
+            hours of flight<br/>
+            <div class="dashPlotCount"> 24</div>
+            minutes average per mission
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade dashboardModal" id="routesModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="removeBlur();">&times;</button>
+        <div class="modal-header">
+          <h3 class="modal-title">Saved Routes</h3>
+        </div>
+        <div class="modal-body">
+          <div id="routesPlot">
+          </div>
+          <div id="routeStats">
+            <div class="icon-map-marker"></div>
+            <div class="dashPlotCount">12</div>
+            saved routes<br/>
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+ <div class="modal fade dashboardModal" id="dronesModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="removeBlur();">&times;</button>
+        <div class="modal-header">
+          <h3 class="modal-title">Drones</h3>
+        </div>
+        <div class="modal-body">
+          <div id="dronesPlot">
+          </div>
+          <div id="dronesStats">
+            <div class="icon-plane"></div>
+            <div class="dashPlotCount">12</div>
+            active drones<br/>
+            <div class="dashPlotCount">30</div>
+            total drones<br/>
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+
+ <div class="modal fade dashboardModal" id="firstsightModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="removeBlur();">&times;</button>
+        <div class="modal-header">
+          <h3 class="modal-title">FirstSight</h3>
+        </div>
+        <div class="modal-body">
+        <div class="product_description">
+          FirstSight is a web-based system that integrates drone tasking, tracking and management into a single tool, dramatically simplifying drone fleet deployment. Improve your situational awareness with real-time updates on where all your drones are - our visual controller depicts individual drone positions and associated telemetry data overlaid on high-quality maps.<br/>
+          <a href="firstsight.html" class="btn productlaunch_btn">Launch FirstSight</a>
+        </div>
+
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<script type="text/javascript">
+
+</script>
+<script src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/dashboard.js"> </script>
+<script type="text/javascript" src="js/flot/jquery.flot.js"> </script>
+<script type="text/javascript" src="js/flot/jquery.flot.time.js"></script>
+<script type="text/javascript" src="js/flot/jquery.flot.pie.js"></script>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+body{
+	margin:0px;
+}
+
+#cpMap{
+	-webkit-filter: contrast(1.5);
+}
+
+.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}
+
+.cPanel{
+	background: #222;
+	z-index: 1;
+	padding:5px;
+}
+
+#leftPanel{
+	position: fixed;
+	left: 0px;
+	width: 30%;
+	height: 100%;
+
+}
+
+#rightPanel{
+	position: fixed;
+	right: 0px;
+	top:40px;
+	width: 20%;
+	min-width: 200px;
+	padding:10px;
+}
+
+#rightPanel .list-group{
+	margin-top:40px;
+}
+
+#rightPanel .list-group-item{
+	background: transparent;
+	border: none;
+	padding: 5px;
+	color: #fff;
+}
+
+#rightPanel .list-group-item .fa{
+	margin-right: 5px;
+}
+
+#leftPanel .panel-group{
+	margin-bottom: 10px;
+}
+
+#topPanel{
+	height: 40px;
+	width: 100%;
+	position: absolute;
+	left: 380px;
+}
+
+.cp_heading{
+	color: #fff;
+	font-size: 16px;
+	font-family: 'Helvetica';
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: 500;
+}
+
+.cp_heading .cpStatus{
+	font-size: 14px;
+}
+.panel-default {
+	background: transparent;
+	border: none;
+}
+ 
+.panel-heading{
+ 	background: transparent !important;
+ 	padding: 2px;
+}
+.panel-title a{ 
+	color:#fff;
+	font-family: 'Helvetica';
+	font-weight: normal;
+	text-decoration: none;
+	font-size: 10px;
+	background: transparent;
+}
+
+.panel-body{
+	border-top: none !important;
+	padding: 2px;
+}
+
+.cpStatus{
+	text-align: right;
+	color: #03c400;
+	float: right;
+}
+
+.cpStatus .fa{
+	margin-right: 5px;
+}
+
+#gpsMap{
+	width: 100%;
+	height: 120px;
+	-webkit-filter: brightness(150%);
+	-webkit-filter: contrast(1.5);
+
+}
+
+.gm-style div:nth-child(2){
+	position: absolute;
+	left:-500px;
+}
+
+.gm-style div:nth-child(2) a div{
+	visibility: hidden
+}
+
+#cpGraph{
+	width: 100%;
+	height: 150px;
+}
+
+.flot-text{
+	color:rgba(255,255,255,0.7) !important;
+}
+
+.activeMissionsTable{
+font-size: 12px;
+color: #fff;
+}
+
+.activeMissionsTable th{
+	text-align: center;
+}
+
+.activeMissionsTable td{
+	text-align: center;
+}
+
+.activeMissionsTable td:hover{
+	cursor: pointer;
+}
+
+.activeMissionsTable tr:not(:first-child):hover{
+	background: rgba(255,255,255,0.4);
+}
+.label{
+	font-size: 12px;
+}
+
+.selectedMission{
+	background: #fff;
+	color: black;
+}
+
+#selectedMissionETA{
+	color: #fff;
+	font-size: 20px;
+	float: right;
+	/*font-weight: bold;*/
+	font-family: 'HelveticaNeue';
+}
+
+#selectedMissionApp img{
+	border-radius: 10px;
+	height: 50px;
+	width: 50px;
+	float: left;
+}
+
+#selectedMissionDrone{
+	color: #fff;
+}
+
+#selectedMissionDrone img{
+	border-radius: 10px;
+	width: 90px;
+	float: left;
+	margin-top: 10px;
+}
+
+#selectedMissionDrone .fa{
+	margin-right: 5px;
+}
+
+#selectedMissionDroneAttributes{
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+
+}
+
+.infoBox{
+	background: rgba(0,0,0,0.6);
+	z-index: -2;
+}
+
+.cp_stat{
+text-align: center;
+float: left;
+background: #333;
+margin-right: 5px;
+width: 110px;
+padding: 10px;
+}
+
+.statistics_value{
+color: #fff;
+font-size:50px;
+}
+
+.statistics_type{
+color: #fff;
+font-size:12px;
+}

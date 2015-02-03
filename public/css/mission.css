@@ -1,0 +1,727 @@
+
+/*google map settings*/
+.gm-style div:nth-child(2){
+position: absolute;
+left:-500px;
+}
+
+
+.gm-style div:nth-child(2) a div{
+visibility: hidden
+}
+
+
+.dropdown-menu{
+min-width: 0px;
+}
+#missionCanvas{
+	-webkit-filter: contrast(1.5);
+
+}
+
+
+
+#pathBuilder{
+	
+	z-index: 1;
+	position: absolute;
+	top: 10px;
+	height: 50px;
+	left: 50%;
+	margin-left: -160px;
+}
+
+.pbButton{
+	background: #222;
+	float: left;
+	width: 50px;
+	height: 40px;
+	font-size: 25px;
+	color: #fff;
+	margin-right: 1px;
+	text-align: center;
+	cursor: pointer;
+	z-index: 1;
+}
+
+#pathBuilder .active{
+	color: #0088cc;
+}
+
+.pbButton:hover{
+	color: #0088cc;
+}
+#rightPanel{
+	position: fixed;
+	right: 0px;
+	width: 200px;
+	height: 300px;
+	z-index: 1;
+	top: 0px;
+
+}
+
+#leftPanel{
+	position: fixed;
+	left: 0px;
+	width: 200px;
+	height: 100px;
+	z-index: 1;
+	top:0px;
+}
+
+#bottomPanel{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height:0px;
+	background-color: #222;
+	padding: 10px;
+	transition:height 0.5s;
+	-webkit-transition:height 0.5s; /* Safari */
+}
+
+
+
+.panel-active{
+	height:90px !important;
+}
+
+.preLaunch{
+	height: 150px !important;
+}
+
+
+#droneStatus{
+	margin-bottom: 10px;
+	padding: 10px;
+	background: #222;
+	color: #fff;
+	border-bottom-right-radius: 5px;
+	width: 140px;
+
+}
+
+#droneStatus .fa{
+	color: #4ad100;
+}
+#eta{
+	background: #222;
+	width: 110px;
+	margin-left: 10px;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 20px;
+	color: #fff;
+	font-size: 16px;
+}
+
+#stats{
+	background: #222;
+	width: 210px;
+	height: 40px;
+	border-bottom-left-radius: 5px;
+	position: absolute;
+	right: 0px;
+	padding:10px;
+	color: #fff;
+}
+
+#stats div:not(:last-child){
+	float: left;
+	margin-right: 13px;
+}
+
+#stats .fa{
+	color: #fff;
+	font-size: 16px;
+}
+
+.stat{
+	float: left;
+	margin-right: 13px;
+}
+
+#battery{
+	width: 30px;
+	height: 10px;
+	width: 30px;
+	height: 12px;
+	margin-top: 3px;
+}
+
+#battery .progress-bar{
+	background-color: #4ad100;
+}
+
+#missionStatus .progress{
+	width: 150px;
+	height: 12px;
+}
+
+.bottomPanel{
+	width: 33%;
+	float: left;
+	padding:10px;
+	color: #fff;
+}
+
+.panelStat{
+	float: left;
+	color: #fff;
+}
+
+
+#mapManipulation{
+	background: #222;
+	margin-left: 10px;
+	border-radius: 5px;
+	font-size: 20px;
+	color: #fff;
+	position: absolute;
+	top:60px;
+	right: 20px;
+	padding: 6px;
+	width: 45px;
+}
+
+#mapManipulation .fa{
+color: #fff;
+font-size: 18px;
+padding: 4px;
+padding-left: 6px;
+padding-right: 6px;
+margin-left: 2px;
+}
+
+
+#mapManipulation .fa:hover{
+text-align: center;
+color: #0088cc;
+cursor: pointer;
+}
+
+#mapManipulation .dropdown-menu{
+background: #222;
+margin-top: -56px;
+margin-left: -170px;
+padding: 5px;
+width: 150px;
+}
+
+#mapManipulation .fa-globe:hover{
+text-decoration: none;
+}
+
+#mapManipulation .dropdown-menu img{
+width: 30px;
+margin-right: 5px;
+}
+
+#mapManipulation .dropdown-menu>li{
+	margin-bottom: 5px;
+	cursor:pointer;
+	font-size: 12px;
+}
+
+#mapManipulation .dropdown-menu>li:hover{
+	background: #0088cc;
+}
+
+#mapManipulation .dropdown-menu>li.active{
+	background: #0088cc;
+}
+#mapManipulation .dropdown-menu::after {
+position: absolute;
+top: 36px;
+right: -10px;
+display: inline-block;
+border-left: 6px solid transparent;
+border-bottom: 6px solid #222;
+border-right: 6px solid transparent;
+content: '';
+transform:rotate(90deg);
+-ms-transform:rotate(90deg); 
+-webkit-transform:rotate(90deg); 
+}
+
+.close{
+font-size: 40px;
+color: #fff;
+opacity: 0.6;
+font-weight: normal;
+font-family: 'HelveticaNeue-UltraLight';
+z-index: 1042;
+}
+
+#panToDrone{
+border-radius: 100px;
+margin-left: -10px;
+margin-top: -5px;
+padding-top: 55px;
+z-index: 100;
+}
+
+#panToDrone .fa{
+position: relative;
+bottom: 45px;
+}
+
+#listWaypoints{
+position: absolute;
+left: 10px;
+width: 50%;
+bottom: 0px;
+height: 100%;
+border-right: 2px solid #333;
+}
+
+
+
+#preMissionStats{
+position: absolute;
+float: left;
+bottom: 0px;
+left: 50%;
+padding-left: 20px;
+color: #fff;
+width: 200px;
+font-size: 12px;
+padding-bottom: 20px;
+height: 100%;
+border-right: 2px solid #333;
+}
+
+#preMissionStats .fa{
+margin-right: 5px;
+}
+
+#simulation{
+position: absolute;
+left: 50%;
+width: 120px;
+bottom: 0px;
+color: #fff;
+margin-left: 200px;
+font-size: 12px;
+border-right: 2px solid #333;
+height: 100%;
+padding-left: 10px;
+cursor: pointer;
+
+}
+
+#simulation .fa{
+font-size: 50px;
+text-align: center;
+width: 90px;
+height: 52px;
+padding: 20px;
+}
+
+
+#simulation .fa:hover{
+color: #7eff00;
+}
+#droneActions{
+width: 100%;
+position: absolute;
+bottom: 0px;
+color: #fff;
+float: left;
+left: 60%;
+margin-left: 200px;
+height: 100%;
+}
+
+
+#droneActions .fa:hover{
+color: #7eff00;
+}
+#edit{
+height: 100%;
+font-size: 50px;
+float: left;
+padding: 10px;
+padding-left: 20px;
+border-right: 2px solid #333;
+padding-right: 20px;
+cursor: pointer;
+}
+
+#edit:hover{
+color: #7eff00;	
+}
+
+#next{
+height: 100%;
+font-size: 40px;
+float: left;
+width: 220px;
+text-align: center;
+padding: 18px;
+cursor: pointer;
+}
+
+#next:hover{
+color: #7eff00;
+}
+
+#next .fa{
+margin-right: 10px;
+}
+.markerCount{
+color: #fff;
+font-size: 18px;
+}
+
+.markerDisplay{
+float: left;
+width: 50px;
+text-align: center;
+position: relative;
+top: 25px;
+}
+
+#waypointAttributes{
+position: absolute;
+left: 0px;
+width: 100px;
+height: 100%;
+padding-left: 10px;
+padding-bottom: 10px;
+padding-top: 10px;
+margin-top: -10px;
+background:#333;
+font-size: 12px;
+}
+
+.waypointAttribute{
+	color: #fff;
+	margin-bottom: 3px;
+}
+
+#confirmWaypoints{
+position: absolute;
+left: 100px;
+bottom: 0px;
+padding: 10px;
+font-size: 12px;
+width: 60%;
+border-right: 2px solid #333;
+}
+
+.waypointattributeValue{
+	color: #fff;
+	margin-bottom: 3px;
+}
+
+.finalmarkerDisplay{
+	width: 100px;
+	top:0px !important;
+}
+
+.finalmarkerDisplay img{
+margin-top: 20px;
+}
+
+#finalDroneActions{
+position: absolute;
+right: 0px;
+bottom: 0px;
+padding: 10px;
+color: #fff;
+font-size: 12px;
+}
+
+#finalDroneActions input[type="text"]{
+color: #fff;
+}
+#missionTimeLimit input[type="text"]{
+background: transparent;
+width: 20px;
+margin-left: 5px;
+background: #333;
+border: none;
+}
+
+#verticalSpeed input[type="text"]{
+background: transparent;
+width: 40px;
+margin-left: 5px;
+background: #333;
+border: none;
+}
+
+#launch{
+font-size: 30px;
+cursor: pointer;
+}
+
+#launch:hover{
+color: #7eff00;
+}
+.pbButton .dropdown-menu{
+background-color: #222;
+width: 120px;
+padding-left: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+
+.pbButton .dropdown-menu img{
+height: 20px;
+width: 20px;
+margin-right: 5px;
+float: left;
+}
+
+
+.pbButton .dropdown-menu>li{
+	margin-bottom: 5px;
+	cursor:pointer;
+	color: #fff;
+	float: left;
+	padding-right: 12px;
+	width: 110px;
+	float: left;
+	font-size: 12px;
+	padding: 5px;
+	float: left;
+}
+
+.pbButton .dropdown-menu>li:hover{
+	background: #0088cc;
+}
+
+.pbButton .dropdown-menu>li.active{
+	color: #fff !important;
+	background: #0088cc;
+	padding-right: 10px;
+}
+
+.pbButton .dropdown-menu::after {
+position: absolute;
+top: -6px;
+left: 10px;
+display: inline-block;
+border-left: 6px solid transparent;
+border-bottom: 6px solid #222;
+border-right: 6px solid transparent;
+content: '';
+}
+
+.waypointheading{
+color: #fff;
+position: absolute;
+top: 0px;
+padding: 2px;
+font-size: 12px;
+width: 50%;
+border-right: 2px solid #333;
+}
+
+#postLaunchStats{
+color: #fff;
+width: 240px;
+height: 100%;
+border-right: 2px solid #333;
+position: absolute;
+left: 0px;
+padding: 10px;
+margin-top: -10px;
+}
+
+#postLaunchDrone{
+float: left;
+height: 100px;
+margin-top: 20px;
+}
+.postLaunchStat{
+float: left;
+font-size: 15px;
+text-align: center;
+width: 110px;
+}
+
+.postLaunchValue{
+font-size: 20px;
+}
+#gauges{
+position: absolute;
+width: 100%;
+}
+
+#gauges input[type="text"]{
+font-size: 20px !important;
+}
+.gaugeHeading{
+font-weight: bold;
+float: left;
+margin-top: 50px;
+font-size: 15px;
+width: 100px;
+}
+.gauge{
+float: left;
+}
+
+#verSpeed{
+position: absolute;
+left: 65%;
+margin-left: 220px;
+width: 260px;
+}
+
+#verSpeed .gaugeHeading{
+font-size: 15px;	
+}
+
+#verSpeed .gauge{
+margin-left: -20px;
+}
+
+#verSpeed input[type="text"]{
+font-size: 24px !important;
+}
+#horizontalSpeed{
+position: absolute;
+left: 63%;
+width: 240px;
+border-right: 2px solid #333;
+margin-top: -10px;
+padding-top: 10px;
+height: 150px;
+}
+
+#horizontalSpeed .gaugeHeading{
+font-size: 15px;
+}
+
+#horizontalSpeed .gauge{
+margin-left: -10px;
+}
+
+#altitude{
+position: absolute;
+left: 250px;
+height: 150px;
+margin-top:-10px;
+padding-top: 10px;
+}
+
+#altitude .gauge{
+margin-left: -20px;
+}
+#attitude{
+position: absolute;
+left: 50%;
+margin-left: -150px;
+top: -90px;
+width: 300px;
+}
+
+#videoModal{
+position: absolute;
+top: 0px;
+left: 0px;
+}
+
+#videoModal .modal-dialog{
+position: absolute;
+left: 0px;
+top: 0px;
+height: 100%;
+width: 100%;
+}
+#videoModal .modal-content {
+background-color: transparent;
+outline: none;
+-webkit-box-shadow: none;
+border: transparent;
+height: 100%;
+width: 1005;
+}
+
+#videoModal .modal-title{
+margin: 0;
+line-height: 1.428571429;
+color: #fff;
+color: rgba(255,255,255,0.8);
+font-size: 30px;
+}
+
+#videoModal .modal-header{
+border: transparent;
+box-shadow: none;
+}
+
+#videoModal .modal-body{
+height: 100%;
+width: 100%;
+}
+#videoModal .modal-footer{
+border:none;
+}
+
+#postLaunchModal{
+position: absolute;
+top: 0px;
+left: 0px;
+}
+#postLaunchModal .modal-content {
+background-color: transparent;
+outline: none;
+-webkit-box-shadow: none;
+border: transparent;
+height: 100%;
+width: 100%;
+}
+
+#postLaunchModal .modal-title{
+margin: 0;
+line-height: 1.428571429;
+color: #fff;
+color: rgba(255,255,255,0.8);
+font-size: 30px;
+}
+
+#postLaunchModal .modal-dialog{
+height: 100%;
+}
+#postLaunchModal .modal-header{
+border: transparent;
+box-shadow: none;
+}
+
+#postLaunchModal .modal-body{
+height: 50%;
+}
+#postLaunchModal .modal-footer{
+border:none;
+}
+
+#postLaunchModal .fa{
+font-size: 60px;
+color: #fff;
+width: 100px;
+position: absolute;
+left: 50%;
+margin-left: -20px;
+
+}
+.simulationProgressBar{
+width: 300px;
+height: 10px;
+position: absolute;
+left: 50%;
+margin-left: -150px;
+top: 50%;
+margin-top: -5px;
+}
+
+#video{
+	width: 100%;
+	height: 100%;
+	border: none;
+}

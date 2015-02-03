@@ -1,0 +1,261 @@
+<html>
+<head>
+<title>Skynet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css">
+<link href="css/main.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="css/cp.css">
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="js/infobox_packed.js"></script>
+
+<script src="js/infobubble-compiled.js"></script>
+</head>
+
+<body style="height:100%; width:100%;">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span><span class="icon-bar"></span>
+    <span class="icon-bar"></span></button><a class="navbar-brand" href="#"><span class="navbar-brand-text">Skynet</span></a></div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html"><span class="nav-icon icon-dashboard"></span>Dashboard</a>
+        </li>
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>My Fleet</a>
+        </li>
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>Settings</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+<div id="leftPanel" class="cPanel">
+	<div class="panel-group">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#gps" href="#gpsPanel">
+	          GPS <span class="cpStatus"><span class="fa fa-circle"></span>ONLINE</span>
+	        </a>
+	      </h4>
+	    </div>
+
+	    <div id="gpsPanel" class="panel-collapse collapse in">
+	      <div class="panel-body">
+	        <div id="gpsMap"></div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
+	<div class="panel-group" style="margin-top:20px;">
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#data" href="#statistics">
+		          STATISTICS
+		        </a>
+		      </h4>
+		    </div>
+
+		    <div id="statistics" class="panel-collapse collapse in">
+		      <div class="panel-body" style="margin-left: 10px; margin-top:10px;">
+		      	<div class="cp_stat">
+			        <div class="statistics_value">5</div>
+			        <div class="statistics_type">Active Missions </div>
+			    </div>
+
+		      	<div class="cp_stat">
+			        <div class="statistics_value">3</div>
+			        <div class="statistics_type">Active Apps </div>
+			    </div>
+
+		      	<div class="cp_stat">
+			        <div class="statistics_value">5</div>
+			        <div class="statistics_type">Routes </div>
+			    </div>
+		      </div>
+		    </div>
+		</div>
+	</div>
+	<div class="panel-group" style="margin-top:50px;">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#table" href="#active">
+	          ACTIVE MISSIONS
+	        </a>
+	      </h4>
+	    </div>
+
+	    <div id="active" class="panel-collapse collapse in">
+	      <div class="panel-body">
+	        <table class="table activeMissionsTable" id="active">
+				<tr>
+					<th>Status</th>
+					<th>Mission ID</th>
+					<th>Drone</th>
+					<th>ETA</th>
+				</tr>
+				<tr>
+					<td class="label label-success">DEPLOY</td>
+					<td>8087</td>
+					<td>Parrot AR </td>
+					<td>
+						<span class="hours1"></span>
+						<span class="minutes1"></span>
+						<span class="seconds1"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="label label-success">DEPLOY</td>
+					<td>8088</td>
+					<td>Phantom DJI</td>
+					<td>
+						<span class="hours2"></span>
+						<span class="minutes2"></span>
+						<span class="seconds2"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="label label-success">DEPLOY</td>
+					<td>8089</td>
+					<td>Arducopter</td>
+					<td>
+						<span class="hours3"></span>
+						<span class="minutes3"></span>
+						<span class="seconds3"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="label label-success">DEPLOY</td>
+					<td>9090</td>
+					<td>CrazyFlie</td>
+					<td>
+						<span class="hours4"></span>
+						<span class="minutes4"></span>
+						<span class="seconds4"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="label label-success">DEPLOY</td>
+					<td>9091</td>
+					<td>Phantom DJI</td>
+					<td>
+						<span class="hours5"></span>
+						<span class="minutes5"></span>
+						<span class="seconds5"></span>
+					</td>
+				</tr>
+			</table>
+	      </div>
+	    </div>
+	  </div>
+
+
+	  <a href="#" class="btn btn-primary">+ Create New Mission</a>
+
+
+	  <div class="panel-group" style="margin-top:20px; display:none;">
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#data" href="#datastream">
+		          DATA LOAD
+		        </a>
+		      </h4>
+		    </div>
+
+		    <div id="datastream" class="panel-collapse collapse in">
+		      <div class="panel-body">
+		        <div id="cpGraph">
+		   		</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	
+	</div>
+
+
+
+</div>
+
+	
+<div id="topPanel" class="cPanel">
+	<div class="cp_heading">
+		CONTROL PANEL<span class="cpStatus"><span class="fa fa-circle"></span>30 PING</span>
+	</div>
+</div>
+
+
+<div id="rightPanel" class="cPanel" style="display:none;" >
+	<div id="selectedMissionApp" style="display:none;">
+		<img src="images/apps_icons/coffee.jpg">
+	</div>
+	<div id="selectedMissionETA">
+		<span class="hours1"></span>
+		<span class="minutes1"></span>
+		<span class="seconds1"></span>
+	</div>
+
+	<div id="selectedMissionDrone" style="clear:both;">
+		<img src="images/drones/parrot_thumb.jpg">
+		<div id="selectedMissionDroneAttributes">
+			<span class="fa fa-bolt"></span>Battery: 63%<br/>
+			<span class="fa fa-signal"></span>Signal: Excellent<br/>
+			<span class="fa fa-rss"></span> HD Video
+		</div>
+	</div>
+	<ul class="list-group" style="clear:both;">
+	  <li class="list-group-item" style="float:right">
+	  	<button onclick="launchcontrolModal();" style="background: transparent;
+border: none;"><span style="font-size: 30px;
+color: #fff;" class="fa fa-external-link"></span></button>
+	  	<a href="#" onclick="hideMissionDetails();"><span style="font-size: 30px;
+color: #fff;" class="fa fa-check-circle"></span></a>
+	  </li>
+	</ul>
+</div>
+
+<div id="cpMap" style="width: 100%; height: 100%;">
+</div>
+
+
+<div class="modal fade dashboardModal" id="controlModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" onclick="removeBlur();" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Choose Control Type</h4>
+        </div>
+        <div class="modal-body">
+          <a class="controlType" href="http://localhost:8080" style="margin-left:100px;"><img src="images/hands.png"><br/><br/><br/>Leap</a>
+          <a class="controlType" href="http://localhost:3000" style="margin-left:100px; margin-top:100px;"><img src="images/keyboard.png"><br/><br/><br/>Keyboard</a>
+
+
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/cp.js"></script>
+<script type="text/javascript" src="js/cpanel.js"></script>
+
+<script type="text/javascript" src="js/epoly.js"></script>
+
+
+</body>
+
+</html>

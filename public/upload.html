@@ -1,0 +1,38 @@
+<html>
+<body>
+<style>
+input{
+  border: 0;
+  padding: 12px;
+  font-size: 18px;
+  }
+  </style>
+    <button onclick="myFunction()"> Upload </button>
+
+  <script>
+  FB.api('/me/albums', 'post',
+{
+    name: 'Your_Album_Name'
+}, function(response) {
+    if (!response || response.error) {
+        alert('Error! Please Try Again');
+    } else {
+        alert("Album Id ::" + response.id);
+    }
+    }
+);
+var imgURL = "YOUR_IMAGE_URL";
+FB.api('/' + ALBUM_ID +'/photos', 'post', {
+    message: 'photo_description',
+    access_token: accessToken,
+    url: imgURL
+}, function (response) {
+    if (!response || response.error) {
+        alert('Error! Please Try Again');
+    } else {
+        alert('Photo Posted');
+    }
+    }
+  </script>
+  </body>
+  </html>

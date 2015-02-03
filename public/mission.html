@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <title>Garuda Cloud| Mission Central</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">'
+    <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="css/bootstrap-switch.css">
+
+    <link href="css/main.css" rel="stylesheet" media="screen">
+    <link href="css/attitude.css" rel="stylesheet" media="screen">
+
+    <link href="css/mission.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .gmnoprint{
+    position: absolute;
+    left:0px;
+    z-index:10000000000 !important;
+    cursor: pointer;
+    }
+    .gm-style .gm-style-mtc div{ 
+    background: rgba(0,0,0,0.5) !important;
+    color: #fff !important;
+    border-radius: 5px !important;
+    padding: 10px !important;  
+    cursor: pointer !important;
+    }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&amp;libraries=places"></script>
+    <script src="js/infobox_packed.js"></script>
+
+    <script src="js/infobubble-compiled.js"></script>
+</head>  
+
+<body style="height:100%">
+
+<div id="leftPanel">
+  <div id="droneStatus">
+    <span class="fa fa-circle"></span>
+    <span id="flightStatus">Status: In-Flight</span>
+  </div>
+  <div id="eta" style="display:none;">
+    <span class="fa fa-clock-o"></span>
+    <span class="hours1"></span>
+    <span class="minutes1"></span>
+    <span class="seconds1"></span>
+  </div>
+</div>
+
+<div id="missionCanvas">
+
+</div>
+<!--
+<div id="settingsPanel" style="/display:none;*/">
+  <ul id="mapType" class="nav nav-pills">
+    <li class="mapClass"><a href="#">Map</a></li>
+    <li class="satelliteClass"><a href="#">Satellite</a></li>
+    <li class="hybridClass active"><a href="#">Hybrid</a></li>
+  </ul>
+
+  <div id="toolBar">
+    <div class="toolSet" id="routeTools">
+      <div class="toolSetHeading">Route Planner:</div>
+      <div id="startingPoint" class="icon-container toolSet1" onclick="startingPoint();">
+        <span class="icon-tool fa fa-flag"></span>
+      </div>
+      <div id="finalDestination" class="icon-container toolSet1" onclick="finalDestination();">
+        <span class="icon-tool fa fa-flag-checkered"></span>
+      </div>
+      <div id="waypointMarker" class="icon-container toolSet1" onclick="waypointMarker();">
+        <span class="icon-tool fa fa-screenshot"></span>
+      </div>
+    </div>
+
+    <div class="toolSet" id="flightModeTools">
+      <div class="toolSetHeading">Flight modes:</div>
+      <div id="freeFlightMode" class="icon-container toolSet2" onclick="freeFlightMode();">
+        <span class="icon-tool icon-rocket"></span>
+      </div>
+      <div id="roadRestrictedMode" class="icon-container toolSet2 active" onclick="roadRestrictedMode();">
+        <span class="icon-tool icon-road"></span>
+      </div>
+      <div id="followMode" class="icon-container toolSet2" onclick="followMode();">
+        <span class="icon-tool icon-location-arrow"></span>
+      </div>
+    </div>
+    <div class="toolSetHeading">Simulate Mission:</div>
+
+    <ul id="simulators" class="nav nav-pills">
+      <li class="2D"><a data-toggle="modal" href="" onclick="twodSimulator();">2D</a></li>
+      <li class="3D"><a href="#">3D</a></li>
+      <li class="fps"><a data-toggle="modal" href="#hyperlapseModal" onclick="init();">FPS</a></li>
+    </ul>
+
+    <div class="toolSetHeading" id="launchMission" onclick="launchMission();">Launch Mission
+    </div>
+  </div>
+</div>
+
+<div id="minimizedSettingsPanel" style="display:none;">
+  <span class="icon-gears"></span>
+</div>
+<div id="directionsPanel" style="">
+</div>
+
+-->
+
+<!--<div id="missionRightPanel" class="missionPanel">
+  <div class="accordion">
+    <h5>Mission Settings</h5>
+    <div>
+      <div id="mapCenter">
+        <span class="fa-map-marker fa"></span><span class="mapCenterString"></span> <a data-toggle="modal" href="#mapModal" class="btn_mapCenter">Change</span></a>
+      </div>
+    </div>
+    <h3>Section 2</h3>
+    <div>
+      <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+    </div>
+    </div>
+</div>-->
+
+
+<div id="pathBuilder">
+
+  <div class="pbButton" id="takeoff" style="border-top-left-radius:10px;border-bottom-left-radius:10px;">
+    <span class="fa fa-arrow-circle-up" onclick="takeoffSequence();"></span>
+  </div>
+
+ 
+  <div id="waypointFlag" class="pbButton">
+    <span class="fa fa-flag" onclick="startingPoint();;"></span>
+  </div>
+  <div class="pbButton" id="finishFlag">
+    <span class="fa fa-flag-checkered" onclick="finalDestination();"></span>
+  </div>
+
+  <div class="pbButton" id="panToDrone">
+    <span class="fa fa-crosshairs"></span>
+  </div>
+
+  <div class="pbButton dropdown" id="complexPath" style="margin-left: -10px;">
+    <span style="position: relative;bottom: 17px;font-size: 35px;" data-toggle="dropdown" href="#">...</span>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li class="complexPath" onclick=""><img src="images/mission_assets/circle.png">Circle</li>
+      <li class="complexPath active" onclick=""><img src="images/mission_assets/rectangle.png">Rectangle</li>
+      <li class="complexPath"><img src="images/mission_assets/zigzag.png">Zig-Zag</li>
+    </ul>
+  </div>
+
+  <div class="pbButton dropdown" id="routeType">
+    <span class="fa fa-road" data-toggle="dropdown" href="#"></span>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li class="routeMode" onclick="roadRestrictedMode();"><img src="images/mission_assets/road.png">Restricted</li>
+      <li class="routeMode active" onclick="freeFlightMode();"><img src="images/mission_assets/freeflight.png">Free Flight</li>
+      <li class="routeMode"><img src="images/mission_assets/source.png">Source Tail</li>
+    </ul>
+  </div>
+
+
+  <div class="pbButton" id="landing" style="border-top-right-radius:10px;border-bottom-right-radius:10px;">
+    <span class="fa fa-arrow-circle-down" onclick="landingSequence();"></span>
+  </div>
+
+  
+</div>
+
+
+<div id="rightPanel">
+  <div id="stats">
+    <div class="fa fa-signal stat">
+    </div>
+    <div id="batteryReading">75%</div>
+    <div class="progress stat" id="battery">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+      </div>
+    </div>
+    <div class='fa fa-bolt' style="color:black;margin-left:-30px;font-size:11px;margin-top:4px;"></div>
+
+    <div class="fa fa-location-arrow">
+    </div>
+
+    <div class="fa fa-video-camera">
+    </div>
+
+    <div class="fa fa-cloud-upload">
+    </div>
+  </div>
+
+  <div id="mapManipulation">
+    <div id="search" class="fa fa-search" data-toggle="modal" href="#mapModal"></div>
+    <div class="dropdown">
+      <a data-toggle="dropdown" class="fa fa-globe" href="#"></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+        <li class="active satelliteClass"><img src="images/mission_assets/satellite.png">Satellite</li>
+        <li class="hybridClass"><img src="images/mission_assets/hybrid.png">Hybrid</li>
+        <li class="mapClass"><img src="images/mission_assets/roadmap.png">Roadmap</li>
+      </ul>
+    </div>
+    <div id="search" class="fa fa-location-arrow"></div><br/>
+    <div id="video" class="fa fa-video-camera" onclick="launchVideoModal();"></div>
+    <div id="controlPanel" class="fa fa-reply" onclick="launchControlPanel();"></div>
+
+  </div>
+</div>
+
+
+<div id="bottomPanel">
+  
+  <div id="prepreLaunch">
+    <!--<div class="waypointheading">Mission Waypoints</div>-->
+
+    <div id="listWaypoints">
+    </div>
+    <div id="preMissionStats">
+      <!--<div>Mission Statistics</div>-->
+      <div style="width:170px; padding: 4px; margin-top: 15px;">
+        <span class="missionAttribute"><span class="fa fa-flag"></span>Mission Type:</span>
+        <span class="missionValue">One way</span><br/>
+        <span class="missionAttribute"><span class="fa fa-check"></span>Total Distance:</span>
+        <span class="missionValue preDistance">952 M</span><br/>
+        <span class="missionAttribute"><span class="fa fa-clock-o"></span>Estimated Time:</span>
+        <span class="missionValue preTime">4:50:28</span>
+      </div>
+    </div>
+    <div id="simulation">
+        <span class="fa fa-plane"></span>
+    </div>
+
+    <div id="droneActions">
+      <div id="edit"><span class="fa fa-edit"></span></div>
+      <div id="next"><span class="fa fa-check-circle"></span>Next</div>
+    </div>
+</div>
+
+  <div id="preLaunch" style="display:none;">
+
+    <div id="waypointAttributes">
+      <div class="waypointAttribute">
+        Height
+      </div>
+      <div class="waypointAttribute">
+        Speed
+      </div>
+      <div class="waypointAttribute">
+        Stop & Turn
+      </div>
+      <div class="waypointAttribute">
+        Holdtime
+      </div>
+    </div>
+
+    <div id="confirmWaypoints">
+
+    </div>
+
+    <div id="preMissionStats" style="left:60%; margin-left: 100px;">
+      <!--<div>Mission Statistics</div>-->
+      <div style="width:170px; padding: 4px; margin-top: 15px;">
+        <span class="missionAttribute"><span class="fa fa-flag"></span>Mission Type:</span>
+        <span class="missionValue">One way</span><br/><br/>
+        <span class="missionAttribute"><span class="fa fa-check"></span>Total Distance:</span>
+        <span class="missionValue">952 M</span><br/><br/>
+        <span class="missionAttribute"><span class="fa fa-clock-o"></span>Estimated Time:</span>
+        <span class="missionValue">4:50:28</span>
+      </div>
+    </div>
+    <div id="finalDroneActions">
+      <div id="missionTimeLimit" style="margin-bottom:5px;">
+        Mission Time Limit:<input type="text" value="15"><input type="text" value="0"><input type="text" value="0">
+      </div>
+      <div id="verticalSpeed" style="margin-bottom:5px;">
+        Vertical Speed:<input type="text" value="0.3">m/s
+      </div>
+
+      <div id="Loop">
+        Loop:<div class="make-switch switch-mini" style="margin-left:10px">
+            <input type="checkbox" checked>
+        </div>
+      </div><br/>
+      <div id="launch" onclick="launchDroneMission();"><span class="fa fa-check-circle" style="margin-right:10px;"></span>Launch
+      </div>
+    </div>
+  </div>
+
+  <div id="postLaunch" class="preLaunch" style="display:none;">
+
+
+    <div id="postLaunchStats">
+      <img id="postLaunchDrone" src="images/drones/parrot_thumb.jpg">
+
+      <div id="nextWaypointDistance" class="postLaunchStat">
+      Target<br/> 
+      <span class="postLaunchValue">952</span>m
+      </div>
+      <div id="distanceFromStart" class="postLaunchStat">
+      <br/>From Start<br/>
+      <span class="postLaunchValue">42</span>m
+      </div>
+    </div>
+
+
+<div id="gauges">
+
+      <div id="altitude" class="panelStat">
+      <div class='gaugeHeading'>Altitude m</div>
+      <div class="gauge">
+        <input type="text" class="altdial" value="34">
+      </div>
+      <!--<input class="knob" data-width="100" data-displayInput=false value="35"> -->
+    </div>
+
+    <div id="verSpeed" class="panelStat">
+      <div class='gaugeHeading'>Vertical Speed m/s
+      </div>
+      <div class='gauge'>
+        <input type="text" class="verdial" value="34">
+      </div>
+      <!--<input class="knob" data-width="50" data-displayInput=false value="35">-->
+    </div>
+
+    <div id="horizontalSpeed" class="panelStat">
+      <div class='gaugeHeading'>Horizontal Speed m/s
+      </div>
+      <div class='gauge'>
+        <input type="text" class="hordial" value="34" style="font-size:20px;">
+      </div>
+      <!--<input class="knob" data-width="50" data-displayInput=false value="35">-->
+    </div>
+
+    <div class="casing" id="attitude">
+      <div class="inner-case">
+        <div class="case-control">
+
+          <div class="weight">
+            <div class="up-chevron">
+              <div></div><div></div><div></div>
+            </div>
+            <div class="aircraft">
+              <div class="left"></div>
+              <div class="centre"></div>
+              <div class="right"></div>
+            </div>
+          </div>
+      
+          <div id="mechanism" class="mechanism">
+            <div class="back sky"></div>
+            <div class="back terrain"></div>
+            
+            <div class="roll">
+              <div class="roll-lines">
+                <div id="zero"></div>
+                <div id="fortyfive-left"></div>
+                <div id="fortyfive-right"></div>
+                
+                <div id="thirty-left"></div>
+                <div id="thirty-right"></div>
+                <div id="sixty-left"></div>
+                <div id="sixty-right"></div>
+                
+                <div id="ninety-left"></div>
+                <div id="ninety-right"></div>
+              </div>
+            </div>
+            
+            <div class="ball">
+              <div class="pitch-lines">
+                <div id="twenty"></div>
+                <div id="fifteen" class="small"></div>
+                <div id="ten"></div>
+                <div id="five" class="small"></div>
+                
+                <div id="minus-five" class="small"></div>
+                <div id="minus-ten"></div>
+                <div id="minus-fifteen" class="small"></div>
+                <div id="minus-twenty"></div>
+              </div>
+            
+              <div class="sky"></div>
+              <div class="terrain"></div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+</div>
+
+  </div>
+
+
+</div>
+
+
+  <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-title">Initialize Mission Location</div>
+          </div>
+          <div class="modal-body">
+            <input type="text" id="locationinput" class="hyperlapseDetails"/>          
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="hyperlapseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-title">Hyperlapse</div>
+          </div>
+          <div class="modal-body">
+           <div id="pano" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index:-1;"></div>
+          <div id="controls">
+            <div id="mapInset" style="width: 300px; height: 200px; position:absolute; left:0px; top:0px; padding: 0;"></div>
+            <div id="controls" style="">
+              <form id="map_form" style="display:none;">
+                <input type="text" name="address" id="address" />
+                <button type="submit" id="searchButton" >Search</button>
+              </form>
+            </div>
+            <div id="text" style="width: 500px; height: 120px; float: left; padding-top: 10px; z-index:0; border-style:solid; border-width:medium;"></div>
+          </div>
+         
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+   <div class="modal fade" id="twodsimModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title">2D Map Simulator</div>
+          </div>
+          <div class="modal-body" style="height:100%;">
+             <div id="twodsimMap" style="width: 100%; height: 100%;"></div>        
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="progress simulationProgressBar">
+          <div  class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+            <span class="sr-only">40% Complete (success)</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="postLaunchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="fa fa-cloud-upload"></div>
+        <div class="progress simulationProgressBar">
+        <div  class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+          <span class="sr-only">40% Complete (success)</span>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.custom.min.js"></script>
+
+
+
+
+
+<script src="js/bootstrap.min.js"></script>
+
+<!--hyperlapse simulator-->
+<script src="js/hyperlapse/dat.gui.min.js"></script>
+<script src="js/hyperlapse/three.min.js"></script>
+<script src="js/hyperlapse/GSVPano.js"></script>
+<script src="js/hyperlapse/hyperlapse.js"></script>
+<script src="js/epoly.js"></script>
+<script src="js/attitude.js"></script>
+<script type="text/javascript" src="js/jquery.knob.js"></script>
+<script type="text/javascript" src="js/dials.js"></script>
+<script src="js/mission.js"></script>
+<script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
+
+<script>
+$('#dsimModal').modal({
+  keyboard:false,
+});
+
+
+
+//init();
+
+</script>
+</body>
+</html>

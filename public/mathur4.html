@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.knob.js"></script>
+
+
+</head>
+
+
+<script>
+/*
+$(document).ready(function() {
+    $('.dial').val(50).trigger('change');//.delay(2000);
+    $(".dial").knob({
+        'min':0,
+        'max':100,
+        'readOnly': true,
+        'width': 120,
+        'height': 120,
+        'fgColor': '#b9e672',
+        'dynamicDraw': true,
+        'thickness': 0.2,
+        'tickColorizeValues': true,
+        'skin':'tron'
+    })
+});
+
+
+*/
+
+	//full_speed = 200;
+	var drawKnob =function (barSize) {
+		$('.dial').val(barSize).trigger('change');//.delay(20);
+		$(".dial").knob({
+			'min':0,
+			'max':200,
+			'readOnly': true,
+			'width': 120,
+			'height': 120,
+			'fgColor': '#b9e672',
+			'dynamicDraw': true,
+			'thickness': 0.2,
+			'tickColorizeValues': true,
+			'skin':'tron'
+		})
+	};
+
+
+	$(document).ready(function() {
+	final_end_speed_number= 150
+	tmp_end_speed_number = final_end_speed_number;
+	cur_speed_number = 80;
+	variation_range = 10;
+	variation_direction= 0;
+	run_flag = true;
+	drawKnobLoop();
+	});
+
+
+	var drawKnobLoop = function() {
+   if (tmp_end_speed_number > cur_speed_number) {
+       cur_speed_number++;
+      }
+      if (tmp_end_speed_number < cur_speed_number) {
+       cur_speed_number--;
+      }
+   if(tmp_end_speed_number == cur_speed_number && final_end_speed != 0) {
+          variation_speed_number = Math.random()*variation_range;
+          if (variation_direction > (variation_speed_number*10/2)) {
+           tmp_end_speed_number = final_end_speed_number - variation_speed_number;
+          } else {
+           tmp_end_speed_number = final_end_speed_number + variation_speed_number;
+          }
+          variation_direction = variation_speed_number*10;
+         }
+
+
+         drawKnob(cur_speed_number);
+  junkVar = setTimeout(drawKnobLoop,10);
+ };
+
+
+</script>
+
+<body>
+<input type="text" class="dial" value="34">
+</body>
+</html>

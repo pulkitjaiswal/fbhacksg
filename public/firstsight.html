@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skynet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/main.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="js/header.js"> </script>
+    <style>
+    .list-group-item.active{
+      background: #0088cc;
+    }
+
+    .btn-primary{
+    background: #0088cc;
+
+    }
+
+    </style>
+
+</head>  
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span><span class="icon-bar"></span>
+    <span class="icon-bar"></span></button><a class="navbar-brand" href="#"><span class="navbar-brand-text">FbSkynet</span></a></div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>Dashboard</a>
+        </li>
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>My Fleet</a>
+        </li>
+        <li class=""><a href="index.html"><span class="nav-icon icon-dashboard"></span>Settings</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container" id="firstsight" style="margin-top:60px;">
+  <div class="list-group col-md-3" id="f_sidenav">
+    <a href="#" class="list-group-item active" onclick="frecentMissions();">
+      Recent Missions
+    </a>
+    <a href="#" class="list-group-item" onclick="fsavedRoutes();">
+      Saved Routes
+      <span class="badge">12</span>
+    </a>
+    <a href="#" class="list-group-item" onclick="fdronesList();">
+      My Drones
+      <span class="badge">12</span>
+    </a>
+    <a href="#" class="list-group-item" onclick="fappsList();">
+      My Apps
+    </a>
+    <a href="#" class="list-group-item">
+     Settings
+    </a>
+  </div>
+  
+<div id="f_main_panel">
+</div>
+
+<div id="f_recent_missions" class="f_option list-group col-md-9" style="">
+      <a class="f_new_mission btn btn-primary" href="mission.html">New Mission</a><br/><br/>
+      <div href="#" class="list-group-item">
+        <div class="col-md-3">
+          <h4 class="list-group-item-heading f_recent_heading">Crazyflie First Flight</h4>
+          <p class="list-group-item-text f_recent_date"><b>August 3</b></p>
+          <p class="list-group-item-text f_recent_drone"><b>Drone:</b> DJI Phantom</p>
+          <p class="list-group-item-text"><b>Flight Duration:</b></p>
+          <p class="list-group-item-text"><b>Distance Covered:</b></p>
+          <p class="list-group-item-text"><b>Data:</b></p>
+        </div>
+        <div class="col-md-3 f_recent_routes">
+          <p><span class="fa fa-flag"></span>158 Cecil Street<a class="f_recent_routes_view" href="#" onclick="launchrecentlocationModal();">View</a></p>
+          <p><span class="fa fa-flag-checkered"></span>Asia Square Tower 2<a class="f_recent_routes_view" onclick="launchrecentlocationModal();" href="#">View</a></p>
+        </div>
+        <div class="col-md-4">
+          <img class="f_map_thumb" src="images/map_thumbs/1.png">
+        </div>
+        <div class="col-md-2">
+          <span onclick="launchrecentlocationModal();" class="btn btn-primary f_mission_btn">View</span>
+          <span onclick="launchrecentlocationModal();" class="btn btn-danger f_mission_btn">Re-Launch</span>
+        </div>
+      </div>
+      <div href="#" class="list-group-item">
+        <div class="col-md-3">
+          <h4 class="list-group-item-heading f_recent_heading">Giza Excavation Hex</h4>
+          <p class="list-group-item-text f_recent_date"><b>August 3</b></p>
+          <p class="list-group-item-text f_recent_drone"><b>Drone:</b> DJI Phantom</p>
+          <p class="list-group-item-text"><b>Flight Duration:</b></p>
+          <p class="list-group-item-text"><b>Distance Covered:</b></p>
+          <p class="list-group-item-text"><b>Data:</b></p>
+        </div>
+        <div class="col-md-3 f_recent_routes">
+          <p><span class="fa fa-flag"></span>158 Cecil Street<a class="f_recent_routes_view" href="#" onclick="launchrecentlocationModal();">View</a></p>
+          <p><span class="fa fa-flag-checkered"></span>Asia Square Tower 2<a class="f_recent_routes_view" onclick="launchrecentlocationModal();" href="#">View</a></p>
+        </div>
+        <div class="col-md-4">
+          <img class="f_map_thumb" src="images/map_thumbs/1.png">
+        </div>
+        <div class="col-md-2">
+          <span onclick="launchrecentlocationModal();" class="btn btn-primary f_mission_btn">View</span>
+          <span onclick="launchrecentlocationModal();" class="btn btn-danger f_mission_btn">Re-Launch</span>
+        </div>
+      </div>
+
+      <div href="#" class="list-group-item">
+        <div class="col-md-3">
+          <h4 class="list-group-item-heading f_recent_heading">Burrito Delivery Test</h4>
+          <p class="list-group-item-text f_recent_date"><b>August 3</b></p>
+          <p class="list-group-item-text f_recent_drone"><b>Drone:</b> DJI Phantom</p>
+          <p class="list-group-item-text"><b>Flight Duration:</b></p>
+          <p class="list-group-item-text"><b>Distance Covered:</b></p>
+          <p class="list-group-item-text"><b>Data:</b></p>
+        </div>
+        <div class="col-md-3 f_recent_routes">
+          <p><span class="fa fa-flag"></span>158 Cecil Street<a class="f_recent_routes_view" href="#" onclick="launchrecentlocationModal();">View</a></p>
+          <p><span class="fa fa-flag-checkered"></span>Asia Square Tower 2<a class="f_recent_routes_view" onclick="launchrecentlocationModal();" href="#">View</a></p>
+        </div>
+        <div class="col-md-4">
+          <img class="f_map_thumb" src="images/map_thumbs/1.png">
+        </div>
+        <div class="col-md-2">
+          <span onclick="launchrecentlocationModal();" class="btn btn-primary f_mission_btn">View</span>
+          <span onclick="launchrecentlocationModal();" class="btn btn-danger f_mission_btn">Re-Launch</span>
+        </div>
+      </div>
+
+      <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">2<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">3<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">4<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+</div>
+
+<div id="f_saved_routes" class="col-md-9 f_option" style="display:none;">
+    You have 12 saved routes
+    <div id="frouteMap">
+    </div>
+</div>
+
+
+<div id="f_apps_list" class="col-md-9 f_option" style="display:none;">
+    <div class="dash_headline" style="margin-left:20px;">Your apps:</div>
+    <div id="fappslineup">
+        <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/1.png">
+          </div>
+          <div class="app_name">
+            InstaDrone
+          </div></a>
+        </div>
+        <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/2.png">
+          </div>
+          <div class="app_name">
+            ThroughFlames
+          </div></a>
+        </div>
+        <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/3.png">
+          </div>
+          <div class="app_name">
+            GoAround
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/4.png">
+          </div>
+          <div class="app_name">
+            FollowMe
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/5.png">
+          </div>
+          <div class="app_name">
+            HideNSeek
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/6.png">
+          </div>
+          <div class="app_name">
+            MineSweeper
+          </div></a>
+        </div>
+         <div class="app col-md-2">
+          <a href="#"><div class="app_img">
+            <img src="images/apps_icons/7.png">
+          </div>
+          <div class="app_name">
+            BayWatch
+          </div></a>
+        </div>
+    </div>
+<ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">2<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">3<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">4<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+  </div>
+
+</div>
+
+<div id="f_drones" class="col-md-9 f_option" style="display:none;">
+  <ul class="list-group">
+    <div href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">Phantom DJI</h4>
+      <div class="col-md-5">
+        <img class="f_drone_img" src="images/drones/phantom_thumb.jpg">
+      </div>
+      <div class="col-md-4">
+        <p class="list-group-item-text"><b>Flying Time</b>: 0.35 hours</p>
+        <p class="list-group-item-text"><b>Payload</b>: 4.5kg</p>
+        <p class="list-group-item-text"><b>Max Speed</b>: 45km/h</p>
+      </div>
+      <div class="col-md-3">
+        <div class="btn btn-primary f_mission_btn">View</div><br/>
+        <div class="btn btn-danger f_mission_btn">Re-Launch</div>
+      </div>
+    </div>
+
+    <div href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">Phantom DJI</h4>
+      <div class="col-md-5">
+        <img class="f_drone_img" src="images/drones/phantom_thumb.jpg">
+      </div>
+      <div class="col-md-4">
+        <p class="list-group-item-text"><b>Flying Time</b>: 0.35 hours</p>
+        <p class="list-group-item-text"><b>Payload</b>: 4.5kg</p>
+        <p class="list-group-item-text"><b>Max Speed</b>: 45km/h</p>
+      </div>
+      <div class="col-md-3">
+        <div class="btn btn-primary f_mission_btn">View</div><br/>
+        <div class="btn btn-danger f_mission_btn">Re-Launch</div>
+      </div>
+    </div>
+
+    <div href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">Phantom DJI</h4>
+      <div class="col-md-5">
+        <img class="f_drone_img" src="images/drones/phantom_thumb.jpg">
+      </div>
+      <div class="col-md-4">
+        <p class="list-group-item-text"><b>Flying Time</b>: 0.35 hours</p>
+        <p class="list-group-item-text"><b>Payload</b>: 4.5kg</p>
+        <p class="list-group-item-text"><b>Max Speed</b>: 45km/h</p>
+      </div>
+      <div class="col-md-3">
+        <div class="btn btn-primary f_mission_btn">View</div><br/>
+        <div class="btn btn-danger f_mission_btn">Re-Launch</div>
+      </div>
+    </div>
+
+  </ul>
+
+  <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">2<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">3<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">4<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">&raquo;</a></li>
+  </ul>
+</div>
+
+
+<div class="modal fade dashboardModal" id="recentlocationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" onclick="removeBlur();" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Rudy's Pub, Palo Alto, CA</h4>
+        </div>
+        <div class="modal-body">
+          <div id="recentMap"></div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade dashboardModal" id="controlModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" onclick="removeBlur();" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Choose Control Type</h4>
+        </div>
+        <div class="modal-body">
+          <a class="controlType" href="http://localhost:8080" style="margin-left:100px;"><img src="images/hands.png"><br/><br/><br/>Leap</a>
+          <a class="controlType" href="http://localhost:3000" style="margin-left:100px; margin-top:100px;"><img src="images/keyboard.png"><br/><br/><br/>Keyboard</a>
+
+
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/fs.js"></script>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Garuda | AppBuilder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap-switch.css">
+<link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css">
+<link rel="stylesheet" href="css/appbuilder.css">
+<link rel="stylesheet" href="css/spectrum.css">
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+<script src="js/infobox_packed.js"></script>
+
+<script src="js/infobubble-compiled.js"></script>
+</head>
+
+<body style="height:100%; width:100%;">
+
+
+<div class="apipanel" id="topPanel">
+	<img id="logo" src="images/brand.png">
+	<div id="title">Garuda AppBuilder</div>
+	<div id="simulator">
+		<span class="fa-play-circle fa" onclick="runSimulation();"></span>
+		<span class="fa-circle fa" onclick="$('#simulationView').modal('hide');">
+		</span>
+		<span class="fa-stop fa" onclick="$('#simulationView').modal('hide');">
+		</span>
+	</div>
+
+	<div id="actions">
+		<span class="fa fa-save" onclick=""></span>
+		<span class="fa fa-undo" onclick=""></span>
+		<span class="fa fa-repeat" onclick=""></span>
+		<span class="fa fa-file" onclick=""></span>
+	</div>
+
+</div>
+
+
+<div class="apipanel" id="leftPanel">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	  	<div class="panel-title">
+	  		UI Block Options
+	  	</div>
+	  </div>
+	  <div class="panel-body">
+		  <ul class="nav nav-tabs">
+			<li class="active"><a href="#apiSpecialOptionsList" class="fa fa-wrench" data-toggle="tab"></a></li>
+		  	<li><a href="#apiViewOptionsList" class="fa fa-crop" data-toggle="tab"></a></li>
+		  </ul> 	
+
+		  <div class="tab-content">
+		  	<ul class="list-group apiPanelList tab-pane active" id="apiSpecialOptionsList">
+		  		<div class="no-option">No Selection</div>
+			</ul>
+
+			<ul class="list-group apiPanelList tab-pane" id="apiViewOptionsList">
+		  		<div class="no-option">No Selection</div>
+			</ul>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div id="apiCanvas">
+	<div id="viewType">
+		<span onclick="singleView();" class="fa fa-crosshairs active"></span>
+		<span onclick="flowchartView();" class="fa fa-sitemap"></span>
+	</div>
+</div>
+
+<div id="rightPanel" class="apipanel">
+	<div class="panel-group" id="accordion" style="height:30%;">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+	          App Settings
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseOne" class="panel-collapse collapse in">
+		      <div class="panel-body">
+		      	<ul class="nav nav-tabs">
+		      		<li class="active"><a href="#apiSettingList" data-toggle="tab" class="fa fa-cog"></a></li>
+					<li><a href="#apiResolutionSettings" data-toggle="tab" class="fa fa-desktop"></a></li>
+	  				<li><a href="#apiCloudSettings" data-toggle="tab" class="fa fa-cloud"></a></li>
+	  			</ul>
+
+	  			<div class="tab-content">
+
+			        <ul class="list-group apiPanelList tab-pane active" id="apiSettingList">
+					  <li class="list-group-item">
+					  	Name
+					  	<input type="text" placeholder="Untitled App" id="appTitle">
+					  </li>
+					  <li class="list-group-item">
+					  	Category
+					  	<select>
+						  <option value="surveillance">Surveillance</option>
+						  <option value="response">Situational Response</option>
+						  <option value="logistics">Logistics</option>
+						</select>
+					  </li>
+					  <li class="list-group-item">
+					  	Private
+					  	<div class="make-switch switch-mini">
+						    <input type="checkbox" checked>
+						</div>
+					  </li>
+					</ul>
+
+					<ul class="list-group apiPanelList tab-pane" id="apiResolutionSettings" >
+						<li class="list-group-item">
+					  		Resolution
+						  	<select>
+							  <option value="1280">1280 x 800</option>
+							  <option value="1152">1152 x 720</option>
+							  <option value="1024">1024 x 640</option>
+							  <option value="800">800 x 500</option>
+							</select>
+					  	</li>
+
+					  	<li class="list-group-item">
+					  		Canvas Background	
+					  		<input type="color" class="colorpicker" name="color2" value="transparent" id="canvasColor">
+					  	</li>
+
+					  	<li class="list-group-item">
+					  		Fullscreen Mode
+					  		<input type="checkbox" checked>
+					  	</li>
+
+					</ul>
+
+					<ul class="list-group apiPanelList tab-pane" id="apiCloudSettings">
+					  <li class="list-group-item">
+					  	Cloud Saving
+					  	<div class="make-switch switch-mini">
+						    <input type="checkbox" checked>
+						</div>
+					  </li>
+					  <li class="list-group-item">
+					  	Data Directory
+					  	<input type="text" value="Drive/">
+					  </li>
+					  <li class="list-group-item">
+					  	Version Control
+					  	<input type="checkbox">
+					  </li>
+					</ul>
+
+
+				</div>
+
+	      	  </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="panel-group" style="height:70%">
+		<div class="panel panel-default">
+	    	<div class="panel-heading">
+	      		<h4 class="panel-title">
+	        	<a href="#">
+	         	 UI Builder
+	        	</a>
+	      		</h4>
+	   		</div>
+	    	<div id="collapseTwo" class="panel-collapse collapse in">
+		      	<div class="panel-body" style="background:#222;">
+		      		<ul class="nav nav-tabs">
+			      		<li class="active"><a href="#uiBuildTextOptions" class="fa fa-pencil" data-toggle="tab"></a></li>
+			      		<li><a href="#uiBuildMapOptions" class="fa fa-location-arrow" data-toggle="tab"></a></li>
+						<li><a href="#uiBuildSensorOptions" class="fa fa-rss" data-toggle="tab"></a></li>
+						<li><a href="#uiBuildGraphOptions" class="fa fa-bar-chart-o" data-toggle="tab"></a></li>
+		  			</ul>
+
+		        	<div class="tab-content">
+
+		        		<ul id="uiBuildTextOptions" class="apiUiBuilder list-group apiPanelList tab-pane fade in active" style="overflow:scroll; overflow-x:hidden;">
+				        	<li class="list-group-item uiBuildOption ui-widget-content" id="uiLabel">
+				          		<div class="uiBuildOptionIcon">
+				          			<img src="images/appbuilder/icons/label.png">
+				          		</div>
+				          		<span class="uiBuildOptionDescription">	  <b>Label</b> - A variably sized text block.
+				          		</span>
+				          	</li>
+						 	<li class="list-group-item uiBuildOption ui-widget-content" id="uiTextField">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/text.png" style="margin-top:15px;"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Text Field</b> - Editable text input block that sends action to target.
+					          	</span>
+						  	</li>
+
+						  	<li class="list-group-item uiBuildOption ui-widget-content" id="uiTextView">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/textview.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Text View</b> - Displays multiple lines of editable text.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption ui-widget-content" id="uiButton">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/button.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Round Rect BUtton</b> - Intercepts click events and sends action to target.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption ui-widget-content" id="uiImage">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/image.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Image View</b> - Displays an image block from the file path.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption ui-widget-content" id="uiLayer">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/layer.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Layer</b> - Displays a transparent or colored layer on top of element(s) on canvas.
+					          	</span>
+						  	</li>						  	
+						</ul>
+
+
+				        <ul id="uiBuildMapOptions" class="apiUiBuilder list-group apiPanelList tab-pane fade in">
+				        	<li class="list-group-item uiBuildOption" id="uiMap">
+				          		<div class="uiBuildOptionIcon" style="margin-left:-2px;"><img src="images/appbuilder/icons/mapview.png"></div>
+				          		<span class="uiBuildOptionDescription">	  <b>Map View</b> - Displays maps and provides an embeddable interface.
+				          		</span>
+				          	</li>
+						 	<li class="list-group-item uiBuildOption" id="uiPathBuilder">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/pathbuilder.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Path Builder</b> - Build flight path with waypoints.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption" id="uiTimer">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/timer.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Timer</b> - Renders a countdown clock for the current mission.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption" id="uiTimeline">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/timeline.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Timeline</b> - Displays a timeline of waypoints and associated stats.
+					          	</span>
+						  	</li>
+						</ul>
+
+						<ul id="uiBuildSensorOptions" class="apiUiBuilder list-group apiPanelList tab-pane fade in" style="overflow: scroll; overflow-x:hidden;">
+				        	<li class="list-group-item uiBuildOption" id="uiPhoto">
+				          		<div class="uiBuildOptionIcon" style="margin-left:-2px;"><img src="images/appbuilder/icons/camera.png"></div>
+				          		<span class="uiBuildOptionDescription">	  <b>Photography</b> - Tool suite for aerial photography.
+				          		</span>
+				          	</li>
+						 	<li class="list-group-item uiBuildOption" id="uiVideo">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/video.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Videography</b> - Tool suit for aerial videography.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption" id="uiInfrared">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/infrared.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Infrared</b> - Tool suit for manipulating infrared sensor data feed.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption" id="uiUltrasonic">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/ultrasonic.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Ultrasonic</b> - Tool suit for manipulating ultrasonic sensor data feed.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption" id="uiRadioactive">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/radioactivity.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Radioactivitiy</b> - Tool suit for monitoring radioactivity levels from the sensor data feed.
+					          	</span>
+						  	</li>
+
+						  	<li class="list-group-item uiBuildOption" id="uiRadioactive">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/audio.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Audio</b> - Tool suit for audio feed from the onboard microphone.
+					          	</span>
+						  	</li>
+
+						</ul>
+
+						<ul id="uiBuildGraphOptions" class="apiUiBuilder list-group apiPanelList tab-pane fade in">
+				        	<li class="list-group-item uiBuildOption" id="uiBarGraph">
+				          		<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/bargraph.png"></div>
+				          		<span class="uiBuildOptionDescription">	  <b>Bar Graph</b> - Displays a bar graph  that takes input from a data field.
+				          		</span>
+				          	</li>
+						 	<li class="list-group-item uiBuildOption" id="uiLineGraph">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/linegraph.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Line Graph</b> - Displays a bar graph  that takes input from a data field.
+					          	</span>
+						  	</li>
+						  	<li class="list-group-item uiBuildOption" id="uiTimer">
+							  	<div class="uiBuildOptionIcon"><img src="images/appbuilder/icons/knob.png"></div>
+					          	<span class="uiBuildOptionDescription">	  <b>Knob</b> - Displays a knob block for real time data visualization. 
+					          	</span>
+						  	</li>
+						</ul>
+
+
+					</div>
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
+
+</div>
+
+<div class="modal fade" id="simulationView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      </button>
+      </div>
+      <div class="modal-body">
+        <div id="simulationCanvas">
+			<div id="simulationProgressBar" class="progress">
+			  <div  class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+			    <span class="sr-only">40% Complete (success)</span>
+			  </div>
+			</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.custom.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="js/spectrum.js"></script>
+<script type="text/javascript" src="js/appbuilder.js"></script>
+<script type="text/javascript" src="js/pathbuilder.js"></script>
+
+</body>
+</html>
